@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "/g5Y7gI/WAHw0ORYkLSIpnlhLZIV78DCiXHWYdgx9F2htF5m1ll6jhgbUqpW7VFl/lhZX7aFOjdGDYXjovSMNw==",
+  "success": true,
+  "projectFilePath": "/Users/lx/Documents/GitHub/sample.netcore6/sample.nettcore6/sample.nettcore6/sample.nettcore6.csproj",
+  "expectedPackageFiles": [
+    "/Users/lx/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/Users/lx/.nuget/packages/swashbuckle.aspnetcore.swagger/6.3.0/swashbuckle.aspnetcore.swagger.6.3.0.nupkg.sha512",
+    "/Users/lx/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.3.0/swashbuckle.aspnetcore.swaggergen.6.3.0.nupkg.sha512",
+    "/Users/lx/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.3.0/swashbuckle.aspnetcore.swaggerui.6.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}
