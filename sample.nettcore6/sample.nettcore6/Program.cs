@@ -30,7 +30,12 @@ app.MapGet("/decorate", (
     cake.PrintLayers();
 })
 .WithName("Decorate");
-
+app.MapGet("/", () =>
+{
+    var barry = GenerateAndSelectABarry();
+    GC.Collect();  //And launchSettings.json set "DOTNET_gcServer": "0"
+    return $"{barry}{Environment.NewLine}{GC.GetTotalMemory(false)/1024/1024}Mb managed memory{Environment.NewLine}{System.Environment.WorkingSet/1024/1024}Mb total used";
+});
 app.Run();
 
 /*
@@ -41,3 +46,32 @@ app.Run();
 Chocolate Layer: Message for the cake: Happy Birthday!
  ---------- 
  */
+
+/*
+ * no gc.collect and DOTNET_gcServer 0
+ Barryb2a6cba5-854f-46dd-a68f-f8aaa8805456
+1520Mb managed memory
+2024Mb total used
+ */
+
+/*
+    GC.Collect();  //And launchSettings.json set "DOTNET_gcServer": "0"
+
+Barry3e1d7aa5-db43-4dd4-b55b-aaeab001695e
+1Mb managed memory
+267Mb total used
+ */
+static string GenerateAndSelectABarry()
+{
+    var barryGenerator = new BarryGenerator();
+    var barrays = barryGenerator.GenerateBarrays();
+    return barrays[new Random().Next(barrays.Count)];
+}
+
+internal class BarryGenerator
+{
+    public List<string> GenerateBarrays()
+    {
+        return Enumerable.Range(1, 10000000).Select(i=>$"Barry{Guid.NewGuid().ToString()}").ToList();
+    }
+}
