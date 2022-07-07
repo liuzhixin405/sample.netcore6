@@ -48,3 +48,4 @@ D:\GitHub\sample.netcore6\sample.nettcore6\sample.nettcore6\obj\Debug\net6.0\ref
 D:\GitHub\sample.netcore6\sample.nettcore6\sample.nettcore6\obj\Debug\net6.0\sample.nettcore6.pdb
 D:\GitHub\sample.netcore6\sample.nettcore6\sample.nettcore6\obj\Debug\net6.0\sample.nettcore6.genruntimeconfig.cache
 D:\GitHub\sample.netcore6\sample.nettcore6\sample.nettcore6\obj\Debug\net6.0\ref\sample.nettcore6.dll
+D:\GitHub\sample.netcore6\sample.nettcore6\sample.nettcore6\bin\Debug\net6.0\appsettings.json
