@@ -1,4 +1,5 @@
-﻿using sample.nettcore6;
+﻿using Microsoft.AspNetCore.HttpLogging;
+using sample.nettcore6;
 using sample.nettcore6.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddW3CLogging(logging =>
+{
+    // Log all W3C fields
+    logging.LoggingFields = W3CLoggingFields.All;
+
+    logging.FileSizeLimit = 5 * 1024 * 1024;
+    logging.RetainedFileCountLimit = 2;
+    logging.FileName = "MyLogFile";
+    logging.LogDirectory = @"C:\logs";
+    logging.FlushInterval = TimeSpan.FromSeconds(2);
+});
 builder.Services.AddScoped<ClientIpCheckActionFilter>(container =>
 {
     var loggerFactory = container.GetRequiredService<ILoggerFactory>();
@@ -30,6 +42,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseW3CLogging();
+
 app.UseRouting();   
 
 app.MapGet("/decorate", (
