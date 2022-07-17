@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.HttpLogging;
 using sample.nettcore6;
 using sample.nettcore6.Service;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,7 +41,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseRateLimiter(new Microsoft.AspNetCore.RateLimiting.RateLimiterOptions
+{
+    GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+    {
+        return RateLimitPartition.CreateConcurrencyLimiter<String>("GeneralLimit",
+            _ => new ConcurrencyLimiterOptions(1, QueueProcessingOrder.NewestFirst, 0));
+        //return RateLimitPartition.CreateTokenBucketLimiter("myTokenBucketLimiter",
+        //    _ => new TokenBucketRateLimiterOptions(10, QueueProcessingOrder.NewestFirst, 0, TimeSpan.FromMicroseconds(10), 10));
+    }),
+    RejectionStatusCode = 429
+});
+/*
+  Request finished HTTP/1.1 GET http://localhost:26672/api/test/get application/x-www-form-urlencoded - - 429 0 - 2.4396ms
+ */
 app.UseHttpsRedirection();
 app.UseW3CLogging();
 
